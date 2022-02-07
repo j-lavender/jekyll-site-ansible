@@ -1,0 +1,21 @@
+---
+- name: jekyll_site | Dependencies | Install additional packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - build-essential
+    - zlib1g-dev
+    - git
+    - nmap
+  become: yes
+
+- name: jekyll_site | Dependencies | Install bundler
+  gem:
+    name: bundler
+    version: "{{ bundler_version }}"
+    state: present
+    include_dependencies: True
+    user_install: False
+  become: yes

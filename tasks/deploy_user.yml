@@ -1,0 +1,15 @@
+---
+- name: jekyll_site | Deploy User | Ensure deploy group exists
+  group:
+    name: "{{ deploy_group }}"
+    state: present
+  become: yes
+
+- name: jekyll_site | Deploy User | Ensure deploy user exists.
+  user:
+    name: "{{ deploy_user }}"
+    group: "{{ deploy_group }}"
+    state: present
+    create_home: yes
+    shell: /bin/bash
+  become: yes
